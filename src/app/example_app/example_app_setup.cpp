@@ -64,7 +64,7 @@ void example_app_setup_setup( uint32_t tile_num ) {
     
     lv_obj_t *exit_label = lv_label_create( exit_cont, NULL);
     lv_obj_add_style( exit_label, LV_OBJ_PART_MAIN, &example_app_setup_style  );
-    lv_label_set_text( exit_label, "my app setup");
+    lv_label_set_text( exit_label, "jg app setup");
     lv_obj_align( exit_label, exit_btn, LV_ALIGN_OUT_RIGHT_MID, 5, 0 );
 
     lv_obj_t *example_app_foobar_switch_cont = lv_obj_create( example_app_setup_tile, NULL );
@@ -81,7 +81,7 @@ void example_app_setup_setup( uint32_t tile_num ) {
 
     lv_obj_t *example_app_foobar_switch_label = lv_label_create( example_app_foobar_switch_cont, NULL);
     lv_obj_add_style( example_app_foobar_switch_label, LV_OBJ_PART_MAIN, &example_app_setup_style  );
-    lv_label_set_text( example_app_foobar_switch_label, "foo bar");
+    lv_label_set_text( example_app_foobar_switch_label, "foo bar jg");
     lv_obj_align( example_app_foobar_switch_label, example_app_foobar_switch_cont, LV_ALIGN_IN_LEFT_MID, 5, 0 );
 }
 

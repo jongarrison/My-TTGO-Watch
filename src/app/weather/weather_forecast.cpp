@@ -242,7 +242,7 @@ void weather_forecast_sync_Task( void * pvParameters ) {
 
                 time( &now );
                 localtime_r( &now, &info );
-                strftime( buf, sizeof(buf), "updated: %d.%b %H:%M", &info );
+                strftime( buf, sizeof(buf), "fresh: %d.%b %H:%M", &info );
                 lv_label_set_text( weather_forecast_update_label, buf );
                 lv_obj_invalidate( lv_scr_act() );
             }
