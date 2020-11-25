@@ -53,7 +53,7 @@ static void enter_ble_widget_event_cb( lv_obj_t * obj, lv_event_t event );
  */
 void ble_app_setup( void ) {
     // register 2 vertical tiles and get the first tile number and save it for later use
-    ble_app_main_tile_num = mainbar_add_app_tile( 1, 2 );
+    ble_app_main_tile_num = mainbar_add_app_tile( 1, 2, "ble app");
     ble_app_setup_tile_num = ble_app_main_tile_num + 1;
 
     // register app icon on the app tile
