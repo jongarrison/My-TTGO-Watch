@@ -147,12 +147,14 @@ void weather_widget_sync_Task( void * pvParameters ) {
             widget_set_icon( weather_widget, (lv_obj_t*)resolve_owm_icon( weather_today.icon ) );
             widget_set_indicator( weather_widget, ICON_INDICATOR_OK );
 
-            if ( weather_config.showWind ) {
-                widget_set_extended_label( weather_widget, weather_today.wind );
-            }
-            else {
-                widget_set_extended_label( weather_widget, "" );
-            }
+            // if ( weather_config.showWind ) {
+            //     widget_set_extended_label( weather_widget, weather_today.wind );
+            // }
+            // else {
+            //     widget_set_extended_label( weather_widget, "" );
+            // }
+            widget_set_extended_label(weather_widget, "Radical!");
+
         }
         else {
             widget_set_indicator( weather_widget, ICON_INDICATOR_FAIL );

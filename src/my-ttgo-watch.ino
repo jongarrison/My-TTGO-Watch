@@ -44,9 +44,10 @@
 #include "app/stopwatch/stopwatch_app.h"
 #include "app/alarm_clock/alarm_clock.h"
 //#include "app/crypto_ticker/crypto_ticker.h"
-#include "app/example_app/example_app.h"
-#include "app/osmand/osmand_app.h"
 #include "app/IRController/IRController.h"
+#include "app/example_app/example_app.h"
+#include "app/ble_app/ble_app.h"
+#include "app/osmand/osmand_app.h"
 #include "app/powermeter/powermeter_app.h"
 
 TTGOClass *ttgo = TTGOClass::getWatch();
@@ -101,6 +102,7 @@ void setup()
     alarm_clock_setup();
     //crypto_ticker_setup();
     example_app_setup();
+    ble_app_setup();
     osmand_app_setup();
     IRController_setup();
     powermeter_app_setup();
