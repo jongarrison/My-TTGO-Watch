@@ -52,7 +52,21 @@
 #include "app/osmand/osmand_app.h"
 #include "app/powermeter/powermeter_app.h"
 
+#include <StreamCommandParser.h>
+#include "bleremote/bleremote.h"
+
 TTGOClass *ttgo = TTGOClass::getWatch();
+StreamCommandParser commandParser(Serial, "serialCommandParser");
+
+void cmd_help_handler(StreamCommandParser& commandParser) {
+  Serial.println("Help - commands available:");
+  commandParser.printAvailableCommands(Serial);
+}
+
+void cmd_scan_handler(StreamCommandParser& commandParser) {
+  Serial.println("BLE Scanning...");
+  BleRemote::startScan();
+}
 
 void setup()
 {
@@ -98,15 +112,18 @@ void setup()
     /*
      * add apps and widgets here!!!
      */
-    weather_app_setup();
-    stopwatch_app_setup();
-    alarm_clock_setup();
     //crypto_ticker_setup();
-    example_app_setup();
+
+    //weather_app_setup(); //might have a good example of putting icon on main screen
+    // stopwatch_app_setup();
+    // alarm_clock_setup();
+    // example_app_setup();
+    // osmand_app_setup();
+    // IRController_setup();
+    // powermeter_app_setup();
+
     ble_app_setup();
-    osmand_app_setup();
-    IRController_setup();
-    powermeter_app_setup();
+
     /*
      *
      */
@@ -129,8 +146,12 @@ void setup()
 
     disableCore0WDT();
     callback_print();
+
+    commandParser.addCommand("h", cmd_help_handler);
+    commandParser.addCommand("scan", cmd_scan_handler);
 }
 
 void loop() {
+    commandParser.readSerial(Serial);
     powermgm_loop();
 }

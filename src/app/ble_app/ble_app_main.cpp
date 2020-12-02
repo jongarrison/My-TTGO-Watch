@@ -30,6 +30,12 @@
 #include "gui/mainbar/mainbar.h"
 #include "gui/statusbar.h"
 
+//BLE Items
+#include <BLEDevice.h>
+//#include <BLE2902.h>
+//#include <BLEServer.h>
+//#include <BLEUtils.h>
+
 lv_obj_t *ble_app_main_tile = NULL;
 lv_style_t ble_app_main_style;
 
@@ -42,6 +48,8 @@ LV_FONT_DECLARE(Ubuntu_72px);
 
 static void exit_ble_app_main_event_cb( lv_obj_t * obj, lv_event_t event );
 static void enter_ble_app_setup_event_cb( lv_obj_t * obj, lv_event_t event );
+static void enter_ble_app_dev_event_cb(lv_obj_t *obj, lv_event_t event);
+
 void ble_app_task( lv_task_t * task );
 
 void ble_app_main_setup( uint32_t tile_num ) {
@@ -67,6 +75,16 @@ void ble_app_main_setup( uint32_t tile_num ) {
     lv_obj_align(setup_btn, ble_app_main_tile, LV_ALIGN_IN_BOTTOM_RIGHT, -10, -10 );
     lv_obj_set_event_cb( setup_btn, enter_ble_app_setup_event_cb );
 
+    //Putting in a "dev_btn" to initiate various testing events
+    lv_obj_t *dev_btn = lv_imgbtn_create(ble_app_main_tile, NULL);
+    lv_imgbtn_set_src(dev_btn, LV_BTN_STATE_RELEASED, &refresh_32px);
+    lv_imgbtn_set_src(dev_btn, LV_BTN_STATE_PRESSED, &refresh_32px);
+    lv_imgbtn_set_src(dev_btn, LV_BTN_STATE_CHECKED_RELEASED, &refresh_32px);
+    lv_imgbtn_set_src(dev_btn, LV_BTN_STATE_CHECKED_PRESSED, &refresh_32px);
+    lv_obj_add_style(dev_btn, LV_IMGBTN_PART_MAIN, &ble_app_main_style);
+    lv_obj_align(dev_btn, ble_app_main_tile, LV_ALIGN_IN_TOP_RIGHT, -10, 10);
+    lv_obj_set_event_cb(dev_btn, enter_ble_app_dev_event_cb);
+
     // uncomment the following block of code to remove the "btapp" label in background
     lv_style_set_text_opa( &ble_app_main_style, LV_OBJ_PART_MAIN, LV_OPA_70);
     lv_style_set_text_font( &ble_app_main_style, LV_STATE_DEFAULT, &Ubuntu_72px);
@@ -85,6 +103,17 @@ static void enter_ble_app_setup_event_cb( lv_obj_t * obj, lv_event_t event ) {
         case( LV_EVENT_CLICKED ):       statusbar_hide( true );
                                         mainbar_jump_to_tilenumber( ble_app_get_app_setup_tile_num(), LV_ANIM_ON );
                                         break;
+    }
+}
+
+static void enter_ble_app_dev_event_cb( lv_obj_t * obj, lv_event_t event ) {
+    switch( event ) {
+        case( LV_EVENT_CLICKED ):       
+            log_i("Dev button clicked log_i");
+
+            BLEScan *pMyScan = BLEDevice::getScan();
+
+            break;
     }
 }
 
